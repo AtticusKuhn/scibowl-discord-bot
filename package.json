@@ -12,6 +12,7 @@
   "dependencies": {
     "@types/node": "^14.11.10",
     "discord.js": "^12.2.0",
+    "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "n": "^6.7.0",
     "ts-node": "^9.0.0",

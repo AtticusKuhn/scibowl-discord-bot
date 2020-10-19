@@ -3,8 +3,10 @@ import {my_client} from "./types"
 const Discord = require("discord.js")
 const client:my_client = new Discord.Client();
 const fs = require("fs")
+const token:string =  require('dotenv').config().parsed.TOKEN
+console.log("token is",token)
 //check for discord bot tokn
-if(!process.env.token){
+if(!token){
     console.log("no bot token found")
     process.exit(1)
 }
@@ -28,5 +30,5 @@ for(const file of fs.readdirSync('./events/')) { // Iterates through every file 
     //@ts-ignore
     client.on(fileName, fileContents.default.bind(null, client)); // Set's the event of whatever the file name is to the bound function of said export (this will automatically make the first parmater of the export function to client.
 }
-client.login(process.env.token)//log in with bot
+client.login(token)//log in with bot
 ""// get rid of implicit printing 

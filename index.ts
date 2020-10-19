@@ -4,7 +4,6 @@ const Discord = require("discord.js")
 const client:my_client = new Discord.Client();
 const fs = require("fs")
 const token:string =  require('dotenv').config().parsed.TOKEN
-console.log("token is",token)
 //check for discord bot tokn
 if(!token){
     console.log("no bot token found")

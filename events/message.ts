@@ -4,7 +4,7 @@ import embeds from "../discord_utils/embeds"
 import {Message} from 'discord.js';
 import {my_client,command} from "../types"
 
-export default function run (client: my_client, msg:Message) { // Function for when a message is sent. "message" = the message object of said new message.
+export default async function  run (client: my_client, msg:Message) { // Function for when a message is sent. "message" = the message object of said new message.
     if (msg.author.bot) return //bot should not interact with other bots
     if (!msg.content.startsWith(config.prefix)) return //bot only responds to messages beggining with prefix
     if(!config.case_sensitive) msg.content = msg.content.toLowerCase()
@@ -24,6 +24,6 @@ export default function run (client: my_client, msg:Message) { // Function for w
         `${command_parsed.error_message}${found_command.sample_usage?"\n Sample usage:  "+found_command.sample_usage:""}${found_command.form?`\n General Form:  `+found_command.form:""}`
         ))
     }else{
-        msg.reply(command_parsed.command.run(command_parsed, msg, client))
+        msg.reply(await command_parsed.command.run(command_parsed, msg, client))
     }
 }

@@ -27,3 +27,20 @@ export interface command_parsed_output{
 } 
 
 
+export interface database_response {
+    question: {
+        api_url: string,
+        bonus_answer: string,
+        bonus_format: "Multiple Choice"|"Short Answer",
+        bonus_question:string,
+        category: string,
+        id: number,
+        search_vector:string,
+        source: string,
+        tossup_answer: string,
+        tossup_format: string,
+        tossup_question: string,
+        uri: string
+    }
+}
+

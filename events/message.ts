@@ -18,7 +18,6 @@ export default async function  run (client: my_client, msg:Message) { // Functio
         return
     }
     const command_parsed = parse_commands(trimmed,found_command)
-    console.log(command_parsed,"command_parsed")
     if(!command_parsed.success){
         msg.reply(embeds.simple_embed(command_parsed.title,  false,
         `${command_parsed.error_message}${found_command.sample_usage?"\n Sample usage:  "+found_command.sample_usage:""}${found_command.form?`\n General Form:  `+found_command.form:""}`

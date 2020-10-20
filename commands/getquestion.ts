@@ -11,8 +11,11 @@ export default {
     run:async (command_parsed:command_parsed_output, msg:Message, client:my_client)=>{
         const question = await get_question()
         await msg.reply(`question:${question.tossup_question}`)
-        console.log("given question")
-        const response = await async_collection(msg, (msg:Message)=>msg.content === question.tossup_answer)
+        const response = await async_collection(
+            msg, 
+            (m:Message)=>m.content === question.tossup_answer,
+            (m:Message)=> m.author.id === msg.author.id,
+        )
         if(response.success){
             return "sucess you are correct"
         }else{

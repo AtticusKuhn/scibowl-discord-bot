@@ -19,7 +19,11 @@ export default {
             const dispatcher = connection.play(stream);
             dispatcher.on("finish",()=>voiceChannel.leave())
         });       
-        const response = await async_collection(msg, (msg)=>msg.content === question.tossup_answer)
+        const response = await async_collection(
+            msg, 
+            (m:Message)=>m.content === question.tossup_answer,
+            (m:Message)=> m.author.id === msg.author.id,
+        )   
         if(response.success){
             return "sucess you are correct"
         }else{

@@ -5,13 +5,13 @@ import {MessageEmbed} from "discord.js"
 export function simple_embed(title:string, success:boolean=true, message:string){
 // inside a command, event listener, etc.
     const example_embed:MessageEmbed = new Discord.MessageEmbed()
-	.setColor(success ? config.success_color : config.failure_color)
-	.setTitle(title)
-	.setURL('https://repl.it/@AtticusKuhn/Sample-discordjs-template')
-	.setDescription(message)
-	.setThumbnail('https://storage.googleapis.com/replit/images/1578865152393_256089a828f3a4aad28080aba5e80078.jpeg')
-	.setTimestamp()
-	.setFooter('Some footer text here', 'https://storage.googleapis.com/replit/images/1578865152393_256089a828f3a4aad28080aba5e80078.jpeg');
+        .setColor(success ? config.success_color : config.failure_color)
+        .setTitle(title)
+        .setURL('https://repl.it/@AtticusKuhn/Sample-discordjs-template')
+        .setDescription(message)
+        .setThumbnail('https://storage.googleapis.com/replit/images/1578865152393_256089a828f3a4aad28080aba5e80078.jpeg')
+        .setTimestamp()
+        .setFooter('Some footer text here', 'https://storage.googleapis.com/replit/images/1578865152393_256089a828f3a4aad28080aba5e80078.jpeg');
     return example_embed
 }
 

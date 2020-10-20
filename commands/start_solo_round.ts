@@ -32,7 +32,6 @@ export default {
                     await msg.reply(`success, score is ${score++}`)
                 }else{
                     await msg.reply(`incorrect: ${question.bonus_answer}`)
-
                 }
             }else{
                 await msg.reply(`incorrect: ${question.tossup_answer}`)

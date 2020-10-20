@@ -21,3 +21,9 @@ export function async_collection(msg:Message, check:(m:Message)=>boolean, filter
         })
     })
 }
+export function verify_answer(user_answer:string, correct_answer:string ){
+    if(user_answer.toLowerCase() === correct_answer.toLowerCase()){
+        return true
+    }
+    
+}

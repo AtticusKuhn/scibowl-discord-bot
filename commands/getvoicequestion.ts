@@ -5,7 +5,7 @@ const Discord = require('discord.js');
 const discordTTS=require("discord-tts");
 import {get_question, async_collection} from "../methods"
 function async_dispatcher(dispatcher: StreamDispatcher, event:string){
-    return new Promise((resolve, reject)=>{
+    return new Promise((resolve, _)=>{
         dispatcher.on(event,()=>resolve())
     })
 }

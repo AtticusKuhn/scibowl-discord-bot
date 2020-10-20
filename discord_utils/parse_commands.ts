@@ -1,5 +1,4 @@
-import config from "../config"
-import {my_client, command} from "../types"
+import { command } from "../types"
 
 function parse_commands(msg: string, found_command:command){
     //check the number of arguments supplied

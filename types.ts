@@ -44,7 +44,7 @@ export interface database_response {
     bonus_answer: string,
     bonus_format: "Multiple Choice"|"Short Answer",
     bonus_question:string,
-    category: string,
+    category: subjects,
     id: number,
     search_vector:string,
     source: string,

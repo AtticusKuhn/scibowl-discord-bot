@@ -22,6 +22,7 @@ export default async function  run (client: my_client, msg:Message) { // Functio
         msg.reply(embeds.simple_embed(command_parsed.title,  false,
         `${command_parsed.error_message}${found_command.sample_usage?"\n Sample usage:  "+found_command.sample_usage:""}${found_command.form?`\n General Form:  `+found_command.form:""}`
         ))
+        return
     }else{
         msg.reply(await command_parsed.command.run(command_parsed, msg, client))
     }

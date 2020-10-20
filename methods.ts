@@ -2,7 +2,7 @@ import {database_response, subjects} from "./types"
 import axios from "axios"
 import { Message } from "discord.js"
 const Discord = require("discord.js")
-export async function get_question(topic:Array<subjects>|null){
+export async function get_question(topic?:Array<subjects>){
     if(topic){
         const topic_question:database_response = ((await axios.post("https://scibowldb.com/api/questions/random",{
              "categories": topic

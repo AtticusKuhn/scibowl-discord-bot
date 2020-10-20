@@ -40,6 +40,5 @@ export interface database_response {
     tossup_format: string,
     tossup_question: string,
     uri: string
-    
 }
 

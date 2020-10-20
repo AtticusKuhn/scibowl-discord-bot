@@ -3,7 +3,7 @@ import {Message, MessageCollector} from "discord.js"
 import {my_client, command_parsed_output} from "../types"
 const Discord = require('discord.js');
 const discordTTS=require("discord-tts");
-import {get_question} from "../methods"
+import {get_question, async_collection} from "../methods"
 
 export default {
     description:"Get a random question",
@@ -19,13 +19,11 @@ export default {
             const dispatcher = connection.play(stream);
             dispatcher.on("finish",()=>voiceChannel.leave())
         });       
-        //@ts-ignore
-        const collector:MessageCollector = new Discord.MessageCollector(msg.channel, m => m.author.id === msg.author.id, { time: 5e3 });
-        collector.on('collect', async(message:Message) => {
-            if(message.content === question.tossup_answer){
-                msg.reply("correct")
-            }
-            msg.reply("incorrect"+question.tossup_answer)
-        })
+        const response = await async_collection(msg, (msg)=>msg.content === question.tossup_answer)
+        if(response.success){
+            return "sucess you are correct"
+        }else{
+            return `no, the correct answer was ${question.tossup_answer}`
+        }
     }
 }

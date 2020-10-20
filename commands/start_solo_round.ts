@@ -22,7 +22,7 @@ export default {
         let score = 0
         for(let question_number =0;question_number<13;question_number++){
             const question = await get_question()
-            await msg.reply(`question number ${question_number}:${question.tossup_question}`)
+            await msg.reply(`question number  ${question_number} \n:${question.tossup_question}`)
             const response:{success?:boolean, message?:Message} = await async_collection(msg, question)
             if(response.success){
                 await msg.reply(`success, score is ${score++}`)

@@ -13,8 +13,10 @@ export function check_answer(answer:string, response:string): boolean{
     //case if question is multiple choice
     if (["w","x","y","z"].indexOf(answer.charAt(0)) > -1) {
         if (response === answer.charAt(0)){
+            //if person correctly answered with the letter
             return true
         } else if (response === answer.slice(answer.indexOf(" ") + 1)) {
+            // if the person correctly answered with the answer
             return true
         }
 
@@ -22,7 +24,7 @@ export function check_answer(answer:string, response:string): boolean{
     //case if answer has "also accept"
     if(answer.indexOf("(ACCEPT:")>-1){
         const alertnate_answer = answer.match(/(?<=\(ACCEPT\:)[^\)]*\)/g)[0]
-        if(response ==alertnate_answer.toLowerCase() ){
+        if(response ===alertnate_answer.toLowerCase() ){
             return true
         }
     }
@@ -43,10 +45,4 @@ export function async_collection(msg:Message, check:(m:Message)=>boolean, filter
             resolutionFunc({success:false})
         })
     })
-}
-export function verify_answer(user_answer:string, correct_answer:string ){
-    if(user_answer.toLowerCase() === correct_answer.toLowerCase()){
-        return true
-    }
-    
 }

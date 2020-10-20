@@ -3,7 +3,7 @@ import {Message, MessageCollector, StreamDispatcher} from "discord.js"
 import {my_client, command_parsed_output} from "../types"
 const Discord = require('discord.js');
 const discordTTS=require("discord-tts");
-import {get_question, async_collection} from "../methods"
+import {get_question, async_collection, check_answer} from "../methods"
 function async_dispatcher(dispatcher: StreamDispatcher, event:string){
     return new Promise((resolve, _)=>{
         dispatcher.on(event,()=>resolve())
@@ -24,7 +24,7 @@ export default {
         await async_dispatcher(dispatcher, "finish")
         const response = await async_collection(
             msg, 
-            (m:Message)=>m.content === question.tossup_answer,
+            (m:Message)=> check_answer(question.tossup_answer, m.content),
             (m:Message)=> m.author.id === msg.author.id,
         )   
         if(response.success){

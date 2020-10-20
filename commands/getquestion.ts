@@ -16,9 +16,9 @@ export default {
             (m:Message)=>m.content === question.tossup_answer,
             (m:Message)=> m.author.id === msg.author.id,
         )
-        if(response.success){
-            return "sucess you are correct"
-        }else{
+        if (response.success) {
+            return "success you are correct"
+        } else {
             return `no, the correct answer was ${question.tossup_answer}`
         }
     }

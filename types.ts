@@ -4,6 +4,18 @@ export interface config_interface {
 
     prefix:string
 }
+export enum subjects{
+    "PHYSICS",
+    "GENERAL SCIENCE",
+    "ENERGY",
+    "EARTH AND SPACE",
+    "EARTH SCIENCE",
+    "CHEMISTRY",
+    "BIOLOGY",
+    "ASTRONOMY",
+    "MATH",
+    "COMPUTER SCIENCE",
+}
 export interface command {
     min_args: Number,
     max_args: Number,

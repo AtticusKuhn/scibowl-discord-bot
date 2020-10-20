@@ -1,10 +1,17 @@
-import {database_response} from "./types"
+import {database_response, subjects} from "./types"
 import axios from "axios"
 import { Message } from "discord.js"
 const Discord = require("discord.js")
-export async function get_question(){
-    const question:database_response = ((await axios.get("https://scibowldb.com/api/questions/random")).data).question
-    return question
+export async function get_question(topic:Array<subjects>|null){
+    if(topic){
+        const topic_question:database_response = ((await axios.post("https://scibowldb.com/api/questions/random",{
+             "categories": topic
+        })).data).question
+        return topic_question
+    }else{
+        const question:database_response = ((await axios.get("https://scibowldb.com/api/questions/random")).data).question
+        return question
+    }
 }
 
 export function check_answer(answer:string, response:string): boolean{
@@ -19,7 +26,6 @@ export function check_answer(answer:string, response:string): boolean{
             // if the person correctly answered with the answer
             return true
         }
-
     }
     //case if answer has "also accept"
     if(answer.indexOf("(ACCEPT:")>-1){

@@ -16,5 +16,8 @@ export function async_collection(msg:Message, check:(m:Message)=>boolean, filter
             }
             resolutionFunc({success:false, message})
         })
+        collector.on("end", ()=>{
+            resolutionFunc({success:false})
+        })
     })
 }

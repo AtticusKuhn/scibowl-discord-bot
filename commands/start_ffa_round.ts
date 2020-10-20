@@ -1,4 +1,4 @@
-import {json_embed} from "../discord_utils/embeds"
+import {json_embed, simple_embed} from "../discord_utils/embeds"
 import {Message, MessageCollector, Channel} from "discord.js"
 import {my_client, command_parsed_output} from "../types"
 const Discord = require('discord.js');
@@ -14,7 +14,7 @@ function async_collect(msg: Message, client:my_client, question:any){
             if(m.content===question.tossup_answer){
                 resolutionFunc( {success:true, m})
             }
-            msg.reply("incorrect")
+            msg.reply(simple_embed("no",false,"incorrect"))
             counts++
             if(counts >=2){
                 resolutionFunc( {success:false, m})
@@ -33,17 +33,18 @@ export default {
         // there are 13 questions in a scibowl round
         for(let question_number = 0;question_number<13;question_number++ ){
             const question = await get_question()
-            await msg.channel.send(` ffa_round \n Tossup number ${question_number} \n ${question.tossup_question}`)
-            const collector:MessageCollector = msg.channel.createMessageCollector((m:Message)=>m.author.id !== client.user.id, { time: 15000, max:2 });
+            await msg.channel.send(simple_embed("fffa",true,` ffa_round \n Tossup number ${question_number} \n ${question.tossup_question}`))
             const result:{success?:boolean, m?:Message} = await async_collect(msg,client, question)
             if(result.success){
                 round_points[result.m.author.id] == (round_points[result.m.author.id] ?? 0) + 1
-                result.m.reply("correct")
+                result.m.reply(simple_embed("yay",true,"correct"))
+            }else{
+                await msg.channel.send(simple_embed("no answer",false,`no one got the correct answer, it was ${question.tossup_answer}`))
             }
-            await msg.channel.send(` ffa_round \n end of question ${question_number} points are ${
+            await msg.channel.send(simple_embed("end",true,` ffa_round \n end of question ${question_number} points are ${
                 Object.keys(round_points).length > 0
                 ? Object.keys(round_points).map((key)=> `<@${key}> - ${round_points[key]}`)
-                :"no points"}`)
+                :"no points"}`))
         }
     }
 }

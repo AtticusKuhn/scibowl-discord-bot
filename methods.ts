@@ -7,9 +7,10 @@ export async function get_question(){
     return question
 }
 
-export function check_answer(answer:string, response:string){
+export function check_answer(answer:string, response:string): boolean{
     answer = answer.toLowerCase()
     response = response.toLowerCase()
+    //case if question is multiple choice
     if (["w","x","y","z"].indexOf(answer.charAt(0)) > -1) {
         if (response === answer.charAt(0)){
             return true
@@ -17,6 +18,13 @@ export function check_answer(answer:string, response:string){
             return true
         }
 
+    }
+    //case if answer has "also accept"
+    if(answer.indexOf("(ACCEPT:")>-1){
+        const alertnate_answer = answer.match(/(?<=\(ACCEPT\:)[^\)]*\)/g)[0]
+        if(response ==alertnate_answer.toLowerCase() ){
+            return true
+        }
     }
     return response === answer;
 }

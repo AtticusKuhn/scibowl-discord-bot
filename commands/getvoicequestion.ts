@@ -15,17 +15,17 @@ export default {
             return "you must be in a voice channel to use this command"
         }
         voiceChannel.join().then(connection => {
-            const stream = discordTTS.getVoiceStream(question.question.tossup_question);
+            const stream = discordTTS.getVoiceStream(question.tossup_question);
             const dispatcher = connection.play(stream);
             dispatcher.on("finish",()=>voiceChannel.leave())
         });       
         //@ts-ignore
         const collector:MessageCollector = new Discord.MessageCollector(msg.channel, m => m.author.id === msg.author.id, { time: 5e3 });
         collector.on('collect', async(message:Message) => {
-            if(message.content === question.question.tossup_answer){
+            if(message.content === question.tossup_answer){
                 msg.reply("correct")
             }
-            msg.reply("incorrect"+question.question.tossup_answer)
+            msg.reply("incorrect"+question.tossup_answer)
         })
     }
 }

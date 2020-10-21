@@ -2,12 +2,12 @@ import {database_response, subjects} from "./types"
 import axios from "axios"
 import { Message } from "discord.js"
 const Discord = require("discord.js")
-export async function get_question(topic?:Array<subjects>){
+export async function get_question(topic?:subjects){
     if(topic){
-        const topic_question:database_response = ((await axios.post("https://scibowldb.com/api/questions/random",{
-             "categories": topic
-        })).data).question
-        return topic_question
+            axios.post("https://scibowldb.com/api/questions/random",'{categories: ["PHYSICS"]}'
+        ).then(d=>console.log(d))
+        .catch(console.log)
+        //return topic_question
     }else{
         const question:database_response = ((await axios.get("https://scibowldb.com/api/questions/random")).data).question
         return question
@@ -37,10 +37,10 @@ export function check_answer(answer:string, response:string): boolean{
     return response === answer;
 }
 
-export function async_collection(msg:Message, check:(m:Message)=>boolean, filter:(m:Message)=>boolean):Promise<{success?:boolean,message?:Message}>{
+export function async_collection(msg:Message, check:(m:Message)=>boolean, filter:(m:Message)=>boolean, time:number = 5e3):Promise<{success?:boolean,message?:Message}>{
     return new Promise( (resolutionFunc,_) => {
         //@ts-ignore
-        const collector:MessageCollector = new Discord.MessageCollector(msg.channel,filter, { time: 5e3 });
+        const collector:MessageCollector = new Discord.MessageCollector(msg.channel,filter, { time: time });
         collector.on('collect', async(message:Message) => {
             if(check(message)){
                 resolutionFunc({success:true, message})

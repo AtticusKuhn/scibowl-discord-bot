@@ -15,8 +15,8 @@ export default {
         console.log(question.tossup_answer)
         const response = await async_collection(
             msg, 
-            (m:Message) => check_answer(question.tossup_answer, m.content),
-            (m:Message)=> m.author.id === msg.author.id,
+            m=> check_answer(question.tossup_answer, m.content),
+            m=> m.author.id === msg.author.id
         )
         if (response.success) {
             return `success you are correct (answer was ${question.tossup_answer})`

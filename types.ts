@@ -33,7 +33,9 @@ export interface command_parsed_output{
     success?: boolean;
     title?: string | undefined;
     error_message?: string | undefined;
-    form?: any;
+    form?:{
+        [key:string]: string
+    } 
     command?: undefined| command;
     args?: undefined| string[]
 } 

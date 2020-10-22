@@ -10,19 +10,14 @@ export default {
     alias: new Set(["question", "newquestion", "q"]),
     form: "<type:physics|general science|energy| earth and space|earth science|chemistry|biology|astronomy|math|computer science>",
     run: async (command_parsed: command_parsed_output, msg: Message, client: my_client) => {
+        //@ts-ignore
         const question = await get_question(command_parsed.form.type ? command_parsed.form.type.toUpperCase() : null)
         await msg.reply(`question:\n${question.tossup_question}`)
         console.log(question.tossup_answer)
         const response = await async_collection(
-<<<<<<< HEAD
-            msg, 
-            m=> check_answer(question.tossup_answer, m.content),
-            m=> m.author.id === msg.author.id
-=======
             msg,
             (m: Message) => check_answer(question.tossup_answer, m.content),
             (m: Message) => m.author.id === msg.author.id,
->>>>>>> 7ae27302f3788cef2a2f8b58d65dd17fb8bd204c
         )
         if (response.success) {
             return `success you are correct (answer was ${question.tossup_answer})`

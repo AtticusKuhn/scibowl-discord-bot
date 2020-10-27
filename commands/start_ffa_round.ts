@@ -15,7 +15,7 @@ function async_collect(msg: Message, client:my_client, question:any){
             if(check_answer(question.tossup_answer, m.content)){
                 resolutionFunc( {success:true, m})
             }
-            msg.reply(simple_embed("no",false,"incorrect"))
+            m.reply(simple_embed("no",false,"incorrect"))
             counts++
             if(counts >=2){
                 resolutionFunc( {success:false, m})

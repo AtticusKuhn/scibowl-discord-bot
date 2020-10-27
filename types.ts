@@ -39,10 +39,10 @@ export interface command_parsed_output{
     command?: undefined| command;
     args?: undefined| string[]
 } 
-
+//type api_url =`https://scibowldb.com/api/questions/random${String}`;
 
 export interface database_response {
-    api_url: string,
+    api_url:string,
     bonus_answer: string,
     bonus_format: "Multiple Choice"|"Short Answer",
     bonus_question:string,

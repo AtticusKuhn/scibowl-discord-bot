@@ -1,6 +1,7 @@
 import {json_embed, simple_embed} from "../discord_utils/embeds"
 import {Message, MessageCollector, Channel} from "discord.js"
 import {my_client, command_parsed_output} from "../types"
+import {check_answer} from "../methods"
 const Discord = require('discord.js');
 import {get_question} from "../methods"
 function async_collect(msg: Message, client:my_client, question:any){
@@ -11,7 +12,7 @@ function async_collect(msg: Message, client:my_client, question:any){
         collector.on('collect', (m:Message) => {
             already_answered.add(msg.author.id)
             console.log(`Collected ${m.content}`);
-            if(m.content===question.tossup_answer){
+            if(check_answer(question.tossup_answer, m.content)){
                 resolutionFunc( {success:true, m})
             }
             msg.reply(simple_embed("no",false,"incorrect"))

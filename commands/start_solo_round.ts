@@ -5,8 +5,7 @@ const Discord = require('discord.js');
 import {get_question, check_answer} from "../methods"
 function async_collection(msg:Message,question:database_response){
     return new Promise( (resolutionFunc,_) => {
-        //@ts-ignore
-        const collector:MessageCollector = new Discord.MessageCollector(msg.channel, m => m.author.id === msg.author.id, { time: 5e3 });
+        const collector:MessageCollector = new Discord.MessageCollector(msg.channel, (m:Message) => m.author.id === msg.author.id, { time: 5e3 });
         collector.on('collect', async(message:Message) => {
             if(check_answer(question.tossup_answer,message.content )){
                 resolutionFunc({success:true, message})

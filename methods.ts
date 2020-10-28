@@ -1,6 +1,6 @@
 import { database_response, subjects } from "./types"
 import axios from "axios"
-import { Message } from "discord.js"
+import { Message, MessageCollector } from "discord.js"
 const Discord = require("discord.js")
 export async function get_question(topic?: subjects) {
     if (topic) {
@@ -40,7 +40,6 @@ export function check_answer(answer: string, response: string): boolean {
 
 export function async_collection(msg: Message, check: (m: Message) => boolean, filter: (m: Message) => boolean, time: number = 30e3): Promise<{ success?: boolean, message?: Message }> {
     return new Promise((resolutionFunc, _) => {
-        //@ts-ignore
         const collector: MessageCollector = new Discord.MessageCollector(msg.channel, filter, { time: time });
         collector.on('collect', async (message: Message) => {
             if (check(message)) {

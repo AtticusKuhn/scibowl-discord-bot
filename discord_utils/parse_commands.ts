@@ -26,7 +26,7 @@ function parse_commands(msg: string, found_command:command){
     }
     //check for form
     if(found_command.form){
-        const form:any = {}
+        const form:{[key:string]:string}= {}
         const form_captures:Array<string> = found_command.form.match(/(\[.*?\]|\<.*?\>|\S+)/g)
         
         //for(const [index, argument] of form_captures.entries()){
@@ -92,7 +92,7 @@ function parse_commands(msg: string, found_command:command){
                     case "greedy":{
                         //console.log("index",index)
                         //console.log("command_args.length+index-form_captures.length",command_args.length+index-form_captures.length)
-                        form[name] = command_args.slice(index, command_args.length+index-form_captures.length)
+                        form[name] = command_args.slice(index, command_args.length+index-form_captures.length).join(" ")
                         word_index = command_args.length+index-form_captures.length
                         //console.log("new index is",index)
                     }

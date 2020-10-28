@@ -11,7 +11,6 @@ export default async function  run (client: my_client, msg:Message) { // Functio
     if(config.remove_duplicate_spaces) msg.content = msg.content.replace(/\s+/g," ")
     const trimmed:string = msg.content.substr(config.prefix.length)//remove prefix from command
     const command:string = trimmed.split(" ")[0]
-    //@ts-ignore
     const found_command:command = client.commands.get(command)|| client.commands.find((c:command) => c.alias ? c.alias.has(command) : false )//check if command is an actual comamnd
     if(!found_command){
         msg.reply(embeds.simple_embed("Unkown Command",false,  `not a valid command. To see a list of possible commands, type ${config.prefix}help`))

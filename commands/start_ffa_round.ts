@@ -1,10 +1,10 @@
 import {json_embed, simple_embed} from "../discord_utils/embeds"
 import {Message, MessageCollector, Channel} from "discord.js"
-import {my_client, command_parsed_output} from "../types"
+import {my_client, command_parsed_output, database_response} from "../types"
 import {check_answer} from "../methods"
 const Discord = require('discord.js');
 import {get_question} from "../methods"
-function async_collect(msg: Message, client:my_client, question:any){
+function async_collect(msg: Message, client:my_client, question:database_response){
     let already_answered = new Set()
     return new Promise( (resolutionFunc,_) => {
         const collector:MessageCollector = msg.channel.createMessageCollector((m:Message)=>m.author.id !== client.user.id && !already_answered.has(msg.author.id), { time: 15000, max:2 });
@@ -30,7 +30,7 @@ export default {
     description:"start a ffa round",
     alias: new Set(["start"]),
     run:async (command_parsed:command_parsed_output, msg:Message, client:my_client)=>{
-        let round_points:any = {}
+        let round_points:{[person:string]:number} = {}
         // there are 13 questions in a scibowl round
         for(let question_number = 0;question_number<13;question_number++ ){
             const question = await get_question()

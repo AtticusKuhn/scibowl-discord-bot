@@ -16,7 +16,7 @@ export default {
             formatted.alias = [...found_command.alias].join(', ')
             return json_embed(formatted)
         }
-        const commands_json: any = {}
+        const commands_json: {[command:string]:string} = {}
         for (const [command, value] of client.commands) {
             commands_json[command] = value.description
         }

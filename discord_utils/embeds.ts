@@ -3,7 +3,6 @@ import config from ".././config"
 import {MessageEmbed} from "discord.js"
 
 export function simple_embed(title:string, success:boolean=true, message:string){
-// inside a command, event listener, etc.
     const example_embed:MessageEmbed = new Discord.MessageEmbed()
         .setColor(success ? config.success_color : config.failure_color)
         .setTitle(title)

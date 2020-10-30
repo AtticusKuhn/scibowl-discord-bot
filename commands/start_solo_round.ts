@@ -3,7 +3,7 @@ import {Message, MessageCollector} from "discord.js"
 import {my_client, command_parsed_output, database_response} from "../types"
 const Discord = require('discord.js');
 import {get_question, check_answer} from "../methods"
-function async_collection(msg:Message,question:database_response){
+function async_collection(msg:Message,question:database_response): Promise<{success?:boolean, message:Message}>{
     return new Promise( (resolutionFunc,_) => {
         const collector:MessageCollector = new Discord.MessageCollector(msg.channel, (m:Message) => m.author.id === msg.author.id, { time: 5e3 });
         collector.on('collect', async(message:Message) => {
@@ -26,7 +26,7 @@ export default {
             if(response.success){
                 await msg.reply(`success, score is ${score++}`)
                 await msg.reply(`BONUS: ${question.bonus_question}`)
-                const bonus_response:{success?:boolean, message?:Message} = await async_collection(msg, question)
+                const bonus_response = await async_collection(msg, question)
                 if(bonus_response.success){
                     await msg.reply(`success, score is ${score++}`)
                 }else{

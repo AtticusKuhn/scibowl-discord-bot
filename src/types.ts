@@ -60,7 +60,7 @@ export interface database_response {
 }
 export interface test {
   type: string;
-  check: (args: any) => boolean | Promise<boolean>;
+  check: (args?: any) => boolean | Promise<boolean>;
   name: string;
   message?: string;
 }

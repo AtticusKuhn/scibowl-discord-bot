@@ -35,8 +35,10 @@ export function check_answer(answer: string, response: string): boolean {
     }
   }
   //case if answer has "also accept"
-  if (answer.indexOf("(ACCEPT:") > -1) {
-    const alternate_answer = answer.match(/(?<=\(ACCEPT\:)[^\)]*\)/g)[0];
+  if (answer.indexOf("(ACCEPT:") > -1 || answer.indexOf("(accept:") > -1) {
+    const alternate_answer = answer.match(
+      /(?<=\(((accept)|(ACCEPT))\:\s)[^\)]*/g
+    )[0];
     if (response === alternate_answer.toLowerCase()) {
       return true;
     }

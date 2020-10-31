@@ -3,9 +3,7 @@ import { Message, MessageCollector } from "discord.js";
 import { my_client, command_parsed_output } from "../types";
 const Discord = require("discord.js");
 import { get_question, async_collection, check_answer } from "../methods";
-function sleep(ms: number): Promise<null> {
-  return new Promise((resolve) => setTimeout(resolve, ms));
-}
+import { sleep } from "../utils";
 
 export default {
   description: "Get a staggered random question",

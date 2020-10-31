@@ -33,4 +33,6 @@ export async function main() {
   await client.login(token); //log in with bot
   return client;
 }
-main();
+if (require.main === module) {
+  main();
+}

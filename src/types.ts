@@ -58,3 +58,9 @@ export interface database_response {
   tossup_question: string;
   uri: string;
 }
+export interface test {
+  type: string;
+  check: (args: any) => boolean;
+  name: string;
+  message?: string;
+}

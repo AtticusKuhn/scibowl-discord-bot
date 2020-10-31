@@ -60,7 +60,10 @@ export default {
       );
       if (result.success) {
         round_points[result.m.author.id] ==
-          (round_points[result.m.author.id] ?? 0) + 1;
+          (round_points[result.m.author.id]
+            ? round_points[result.m.author.id]
+            : 0) +
+            1;
         result.m.reply(simple_embed("yay", true, "correct"));
       } else {
         await msg.channel.send(

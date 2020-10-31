@@ -1,5 +1,5 @@
 const Discord = require("discord.js");
-import config from ".././config";
+import config from "../config";
 import { MessageEmbed } from "discord.js";
 
 export function simple_embed(
@@ -43,7 +43,7 @@ export function json_embed(json: any) {
 }
 
 export default { simple_embed, json_embed };
-function flatten(array: Array<any>): Array<any> {
+function flatten(array: any): any {
   if (array.length == 0) return array;
   else if (Array.isArray(array[0]))
     return flatten(array[0]).concat(flatten(array.slice(1)));

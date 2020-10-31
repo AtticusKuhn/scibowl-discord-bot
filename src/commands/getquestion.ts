@@ -7,6 +7,7 @@ import { get_question, async_collection, check_answer } from "../methods";
 export default {
   description: "Get a random question",
   alias: new Set(["question", "newquestion", "q"]),
+  sample_usage: "getquestion",
   form:
     "<type:physics|general science|energy| earth and space|earth science|chemistry|biology|astronomy|math|computer science>",
   run: async (

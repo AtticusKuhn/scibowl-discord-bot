@@ -39,13 +39,13 @@ export async function run_tests(client: Client, tests: Array<test>) {
     if (test.type === "message") {
       const response_message = await message_test(client, test.message);
       if (response_message) {
-        result = test.check(response_message);
+        result = await test.check(response_message);
       }
     }
     if (result) {
-      console.log(`${test.name} succeeded`);
+      console.log("\x1b[32m", `Unit Test: ${test.name} succeeded`);
     } else {
-      console.log(`${test.name} failed`);
+      console.log("\x1b[31m", `Unit Test: ${test.name} failed`);
     }
   }
   process.exit(0);

@@ -31,6 +31,6 @@ export async function main() {
     client.on(fileName, fileContents.default.bind(null, client)); // Set's the event of whatever the file name is to the bound function of said export (this will automatically make the first parmater of the export function to client.
   }
   await client.login(token); //log in with bot
-  return;
+  return client;
 }
 main();

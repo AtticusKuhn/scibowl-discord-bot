@@ -10,6 +10,7 @@ function sleep(ms: number): Promise<null> {
 export default {
   description: "Get a staggered random question",
   alias: new Set(["s_q", "newquestion", "q"]),
+  sample_usage: "s_q",
   form:
     "<type:physics|general science|energy| earth and space|earth science|chemistry|biology|astronomy|math|computer science>",
   run: async (

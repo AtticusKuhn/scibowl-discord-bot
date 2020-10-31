@@ -5,6 +5,7 @@ export default {
   description: "this shows all availiable commands",
   form: "<command>",
   alias: new Set(["h"]),
+  sample_usage: "help",
   run: async (
     command_parsed: command_parsed_output,
     msg: Message,

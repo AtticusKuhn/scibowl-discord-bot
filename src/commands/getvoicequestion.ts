@@ -12,6 +12,7 @@ function async_dispatcher(dispatcher: StreamDispatcher, event: string) {
 export default {
   description: "Get a random question",
   alias: new Set(["question", "newquestion", "q"]),
+  sample_usage: "getvoicequestion",
   run: async (
     command_parsed: command_parsed_output,
     msg: Message,

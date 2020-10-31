@@ -37,6 +37,7 @@ function async_collect(
 export default {
   description: "start a ffa round",
   alias: new Set(["start"]),
+  sample_usage: "start_ffa_round",
   run: async (
     command_parsed: command_parsed_output,
     msg: Message,

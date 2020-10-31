@@ -7,6 +7,7 @@ import { get_question, async_collection } from "../methods";
 export default {
   description: "start a team round",
   alias: new Set(["start_team"]),
+  sample_usage: "start_team",
   run: async (
     command_parsed: command_parsed_output,
     msg: Message,

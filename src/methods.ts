@@ -16,7 +16,7 @@ export async function get_question(topic?: subjects) {
     const question: database_response = (
       await axios.get("https://scibowldb.com/api/questions/random")
     ).data.question;
-    console.log(question.uri);
+    // console.log(question.uri);
     return question;
   }
 }

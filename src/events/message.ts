@@ -6,7 +6,7 @@ import { my_client, command } from "../types";
 
 export default async function run(client: my_client, msg: Message) {
   // Function for when a message is sent. "message" = the message object of said new message.
-  if (msg.author.bot) return; //bot should not interact with other bots
+  if (msg.author.bot && msg.author.id !== config.tester_bot_id) return; //bot should not interact with other bots
   if (!msg.content.startsWith(config.prefix)) return; //bot only responds to messages beggining with prefix
   if (!config.case_sensitive) msg.content = msg.content.toLowerCase();
   if (config.remove_duplicate_spaces)

@@ -1,8 +1,8 @@
-import { json_embed } from "../discord_utils/embeds";
+import { json_embed } from "../../discord_utils/embeds";
 import { Message, MessageCollector, Channel } from "discord.js";
-import { my_client, command_parsed_output } from "../types";
+import { my_client, command_parsed_output } from "../../types";
 const Discord = require("discord.js");
-import { get_question, async_collection } from "../methods";
+import { get_question, async_collection } from "../../methods";
 
 export default {
   description: "start a team round",

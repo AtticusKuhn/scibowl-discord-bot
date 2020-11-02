@@ -1,9 +1,9 @@
-import { json_embed } from "../discord_utils/embeds";
+import { json_embed } from "../../discord_utils/embeds";
 import { Message, MessageCollector } from "discord.js";
-import { my_client, command_parsed_output } from "../types";
+import { my_client, command_parsed_output } from "../../types";
 const Discord = require("discord.js");
-import { get_question, async_collection, check_answer } from "../methods";
-import { sleep } from "../utils";
+import { get_question, async_collection, check_answer } from "../../methods";
+import { sleep } from "../../utils";
 
 export default {
   description: "Get a staggered random question",

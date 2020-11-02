@@ -4,6 +4,7 @@ const Discord = require("discord.js");
 const client: my_client = new Discord.Client();
 const fs = require("fs");
 const token: string = require("dotenv").config().parsed.TOKEN;
+import { get_directories } from "./utils";
 export async function main() {
   //check for discord bot tokn
   if (!token) {
@@ -12,15 +13,18 @@ export async function main() {
   }
   //set up commands
   client.commands = new Discord.Collection();
-  for (const file of fs.readdirSync("./src/commands/")) {
-    // Iterates through every file in the ./commands/ folder.
-    if (!file.endsWith(".js") && !file.endsWith(".ts"))
-      // This is to prevent any files that aren't .js files from being processed as a command.
-      continue;
-    const fileName: string = file.substring(0, file.length - 3); // Removes last three characters from file name to get rid of the .js extension (which should™ be .js ^^) for propper file name.
-    const fileContents = await import(`./commands/${file}`); // Defines fileContents of the export of the command in question.
-    client.commands.set(fileName, fileContents.default); // Adds the command name to the client.commands collection with a value of it's respective exports.
-  }
+  get_directories("src/commands", async (_: Error, res: Array<string>) => {
+    for (const file of res) {
+      const fileName: string = file
+        .substring(0, file.length - 3)
+        .match(/([^\/]+$)/g)[0];
+      // Removes last three characters from file name to get rid of the .js extension (which should™ be .js ^^) for propper file name.
+      const fileContents = await import(`${process.cwd()}/${file}`); // Defines fileContents of the export of the command in question.
+      client.commands.set(fileName, fileContents.default); // Adds the command name to the client.commands collection with a value of it's respective exports.
+    }
+
+    console.log(res);
+  });
   //set up for each event
   for (const file of fs.readdirSync("./src/events/")) {
     // Iterates through every file in the ./events/ folder.

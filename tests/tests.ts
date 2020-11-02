@@ -20,7 +20,7 @@ export default function generate_tests(client: my_client) {
       type: "message",
       check: (msg: Message) =>
         !!msg.embeds && msg.embeds[0].color === config.success_color,
-      name: "does help return an embed",
+      name: "does help return an embed?",
       message: `${config.prefix}help`,
     },
     {

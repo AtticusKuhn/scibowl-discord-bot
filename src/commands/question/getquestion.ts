@@ -1,8 +1,8 @@
-import embeds, { json_embed, simple_embed } from "../discord_utils/embeds";
+import embeds, { json_embed, simple_embed } from "../../discord_utils/embeds";
 import { Message, MessageCollector } from "discord.js";
-import { my_client, command_parsed_output } from "../types";
+import { my_client, command_parsed_output } from "../../types";
 const Discord = require("discord.js");
-import { get_question, async_collection, check_answer } from "../methods";
+import { get_question, async_collection, check_answer } from "../../methods";
 
 export default {
   description: "Get a random question",
@@ -40,8 +40,8 @@ export default {
       );
     } else {
       return simple_embed(
-        "yes",
-        true,
+        "no",
+        false,
         `no, the correct answer was ${question.tossup_answer}. Your answer was ${response.message}`
       );
     }

@@ -1,8 +1,12 @@
-import { json_embed } from "../discord_utils/embeds";
+import { json_embed } from "../../discord_utils/embeds";
 import { Message, MessageCollector } from "discord.js";
-import { my_client, command_parsed_output, database_response } from "../types";
+import {
+  my_client,
+  command_parsed_output,
+  database_response,
+} from "../../types";
 const Discord = require("discord.js");
-import { get_question, check_answer } from "../methods";
+import { get_question, check_answer } from "../../methods";
 function async_collection(
   msg: Message,
   question: database_response

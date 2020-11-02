@@ -1,6 +1,6 @@
-import { json_embed, simple_embed } from "../discord_utils/embeds";
+import { json_embed, simple_embed } from "../../discord_utils/embeds";
 import { Message } from "discord.js";
-import { my_client, command_parsed_output, command } from "../types";
+import { my_client, command_parsed_output, command } from "../../types";
 export default {
   description: "this shows all availiable commands",
   form: "<command>",

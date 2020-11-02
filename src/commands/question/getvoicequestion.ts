@@ -1,9 +1,9 @@
-import { json_embed } from "../discord_utils/embeds";
+import { json_embed } from "../../discord_utils/embeds";
 import { Message, MessageCollector, StreamDispatcher } from "discord.js";
-import { my_client, command_parsed_output } from "../types";
+import { my_client, command_parsed_output } from "../../types";
 const Discord = require("discord.js");
 const discordTTS = require("discord-tts");
-import { get_question, async_collection, check_answer } from "../methods";
+import { get_question, async_collection, check_answer } from "../../methods";
 function async_dispatcher(dispatcher: StreamDispatcher, event: string) {
   return new Promise((resolve, _) => {
     dispatcher.on(event, () => resolve());

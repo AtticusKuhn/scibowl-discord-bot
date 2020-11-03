@@ -3,6 +3,34 @@ import config from "../src/config";
 
 import { async_collection } from "../src/methods";
 import { my_client } from "../src/types";
+
+export class Test {
+  type: null | string;
+  check: (args?: any) => boolean | Promise<boolean>;
+  name: string;
+  constructor(check: (args: any) => boolean | Promise<boolean>, name: string) {
+    this.check = check;
+    this.name = name;
+    this.type = null;
+  }
+}
+export class Message_Test extends Test {
+  message: string;
+  type: string;
+  check: (args?: any) => boolean | Promise<boolean>;
+  name: string;
+
+  constructor(
+    message: string,
+    check: (args?: any) => boolean | Promise<boolean>,
+    name: string
+  ) {
+    super(check, name);
+    this.message = message;
+    this.type = "message";
+  }
+}
+
 export default function generate_tests(client: my_client) {
   // const auto_generated_test_for_each_command = client.commands.map(
   //   (command, key) => {
@@ -16,16 +44,15 @@ export default function generate_tests(client: my_client) {
   // );
   return [
     // ...auto_generated_test_for_each_command,
-    {
-      type: "message",
-      check: (msg: Message) =>
+    new Message_Test(
+      `${config.prefix}help`,
+      (msg: Message) =>
         !!msg.embeds && msg.embeds[0].color === config.success_color,
-      name: "does help return an embed?",
-      message: `${config.prefix}help`,
-    },
-    {
-      type: "message",
-      check: async (msg: Message) => {
+      "does help return an embed?"
+    ),
+    new Message_Test(
+      `${config.prefix}q`,
+      async (msg: Message) => {
         await msg.channel.send("incorrect answer");
         const response_message = await async_collection(
           msg,
@@ -36,44 +63,38 @@ export default function generate_tests(client: my_client) {
         if (!response_message.success) return false;
         return !!response_message.message;
       },
-      name: "does answering a question work?",
-      message: `${config.prefix}q`,
-    },
-    {
-      type: "message",
-      check: async (msg: Message) => {
+      "does answering a question work?"
+    ),
+    new Message_Test(
+      `${config.prefix}q`,
+      async (msg: Message) => {
         await msg.channel.send("sample answer");
         return !!msg.embeds[0];
       },
-      name: "does getquestion return an inital embed",
-      message: `${config.prefix}q`,
-    },
-    {
-      type: "function",
-      check: async () => {
-        const { get_question } = await import("../src/methods");
-        return !!(await get_question());
-      },
-      name: "does get_question return a question?",
-    },
-    {
-      type: "function",
-      name: "does check_answer work as expected?",
-      check: async () => {
-        const { check_answer } = await import("../src/methods");
-        // console.log(check_answer("w) yeet", "w"));
-        // console.log(check_answer("w) yeet", "yeet"));
-        // console.log(check_answer("bruh", "bruh"));
-        // console.log(check_answer("bruh (ACCEPT: yeet)", "yeet"));
-        // console.log(check_answer("Case", "case"));
-        return (
-          check_answer("w) yeet", "w") &&
-          check_answer("w) yeet", "yeet") &&
-          check_answer("bruh", "bruh") &&
-          check_answer("bruh (ACCEPT: yeet)", "yeet") &&
-          check_answer("Case", "case")
-        );
-      },
-    },
+      "does getquestion return an inital embed"
+    ),
+    new Test(async () => {
+      const { get_question } = await import("../src/methods");
+      return !!(await get_question());
+    }, "does get_question return a question?"),
+    new Test(async () => {
+      const { get_question } = await import("../src/methods");
+      return !!(await get_question());
+    }, "does get_question return a question?"),
+    new Test(async () => {
+      const { check_answer } = await import("../src/methods");
+      // console.log(check_answer("w) yeet", "w"));
+      // console.log(check_answer("w) yeet", "yeet"));
+      // console.log(check_answer("bruh", "bruh"));
+      // console.log(check_answer("bruh (ACCEPT: yeet)", "yeet"));
+      // console.log(check_answer("Case", "case"));
+      return (
+        check_answer("w) yeet", "w") &&
+        check_answer("w) yeet", "yeet") &&
+        check_answer("bruh", "bruh") &&
+        check_answer("bruh (ACCEPT: yeet)", "yeet") &&
+        check_answer("Case", "case")
+      );
+    }, "does check_answer work as expected?"),
   ];
 }

@@ -1,4 +1,4 @@
-var glob = require("glob");
+const glob = require("glob");
 
 export function sleep(ms: number): Promise<void> {
   return new Promise((resolve) => setTimeout(resolve, ms));

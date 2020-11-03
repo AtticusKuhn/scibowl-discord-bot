@@ -11,7 +11,7 @@ export default function run(client: my_client) {
       //   game: { // Game object.
       //     name: "name", // Set's game name to the statusMessage value of the config file.
       //     url: null, // Set's the game's URL to null because this is a PLAYING presence.
-      //     type: "PLAYING" // Set's game type to "Playing ..." This is pretty easy to change and cool so here's a doc: https://discord.js.org/#/docs/main/stable/typedef/ActivityType
+      //     type: "PLAYING" //Set's game type to "Playing ..." This is pretty easy to change and cool so here's a doc: https://discord.js.org/#/docs/main/stable/typedef/ActivityType
       //   }
     }
   );

@@ -22,8 +22,7 @@ export async function main() {
       const fileContents = await import(`${process.cwd()}/${file}`); // Defines fileContents of the export of the command in question.
       client.commands.set(fileName, fileContents.default); // Adds the command name to the client.commands collection with a value of it's respective exports.
     }
-
-    console.log(res);
+    //console.log(res);
   });
   //set up for each event
   for (const file of fs.readdirSync("./src/events/")) {

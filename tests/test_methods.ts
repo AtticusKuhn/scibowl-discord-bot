@@ -5,6 +5,7 @@ import { async_collection } from "../src/methods";
 import config from "../src/config";
 import { Client, TextChannel } from "discord.js";
 import { sleep } from "../src/utils";
+import { Test, Message_Test } from "./tests";
 const token: string = require("dotenv").config().parsed.UNIT_TEST_TOKEN;
 
 export async function message_test(client: Client, message: string) {
@@ -18,17 +19,23 @@ export async function message_test(client: Client, message: string) {
   );
   return response_message.message;
 }
-export async function run_tests(client: Client, tests: Array<test>) {
+export async function run_tests(
+  client: Client,
+  tests: Array<Test | Message_Test>
+) {
   await client.login(token);
   for (const test of tests) {
     let result = false;
     if (test.type === "message") {
-      const response_message = await message_test(client, test.message);
+      const response_message = await message_test(
+        client,
+        (test as Message_Test).message
+      );
       if (response_message) {
         result = await test.check(response_message);
       }
       await sleep(3e3); //do not get ratelimited by discord API
-    } else if (test.type === "function") {
+    } else {
       result = await test.check();
     }
     if (result) {

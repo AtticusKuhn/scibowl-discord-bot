@@ -28,6 +28,10 @@ export default async function run(client: my_client, msg: Message) {
     );
     return;
   }
+  if (found_command.admin && !config.bot_owners.has(msg.author.id))
+    return await msg.reply(
+      embeds.simple_embed("not admin", false, "must be admin")
+    );
   const command_parsed = parse_commands(trimmed, found_command);
   if (!command_parsed.success) {
     msg.reply(
@@ -44,5 +48,6 @@ export default async function run(client: my_client, msg: Message) {
     return;
   } else {
     msg.reply(await command_parsed.command.run(command_parsed, msg, client));
+    client.commands_responded++;
   }
 }

@@ -15,6 +15,7 @@ export default function run(client: my_client) {
       //   }
     }
   );
-
+  client.commands_responded = 0;
+  client.startup_time = new Date().getTime();
   console.log(`logged in as ${client.user.tag}`);
 }

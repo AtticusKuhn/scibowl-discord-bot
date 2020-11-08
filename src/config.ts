@@ -8,5 +8,6 @@ export default {
   remove_duplicate_spaces: true,
   bot_id: "737380360081637416",
   tester_bot_id: "730939983858499645",
+  bot_owners: new Set(["464954455029317633", "190128725008973825"]),
 };
 //module.exports  = config

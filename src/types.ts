@@ -22,6 +22,7 @@ export interface command {
   form: string;
   description: string;
   alias: Set<string>;
+  admin?: boolean;
   sample_usage: string;
   run: (
     command_parsed: command_parsed_output,
@@ -31,6 +32,8 @@ export interface command {
 }
 export interface my_client extends Client {
   commands?: Collection<string, command>;
+  commands_responded?: number;
+  startup_time?: number;
 }
 export interface command_parsed_output {
   success?: boolean;

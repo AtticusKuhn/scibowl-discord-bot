@@ -1,5 +1,5 @@
 import { run_tests } from "./test_methods";
-import generate_tests from "./tests";
+import generate_tests from "./generate_tests";
 import { Client } from "discord.js";
 import { main } from "../src/index";
 const Discord = require("discord.js");

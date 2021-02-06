@@ -4,14 +4,17 @@ import { my_client, command_parsed_output } from "../../types";
 const Discord = require("discord.js");
 const discordTTS = require("discord-tts");
 import { get_question, async_collection, check_answer } from "../../methods";
-function async_dispatcher(dispatcher: StreamDispatcher, event: string) {
+function async_dispatcher(
+  dispatcher: StreamDispatcher,
+  event: string
+): Promise<void> {
   return new Promise((resolve, _) => {
     dispatcher.on(event, () => resolve());
   });
 }
 export default {
   description: "Get a random question",
-  alias: new Set(["question", "newquestion", "q"]),
+  alias: new Set(["vq", "nvq"]),
   sample_usage: "getvoicequestion",
   run: async (
     command_parsed: command_parsed_output,

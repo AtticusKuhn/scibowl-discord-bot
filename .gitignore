@@ -6,3 +6,5 @@ tsconfig.json
 .vscode
 launch.json
 **/node_modules
+yarn.lock
+dist/

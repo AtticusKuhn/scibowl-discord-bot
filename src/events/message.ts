@@ -11,12 +11,16 @@ export default async function run(client: my_client, msg: Message) {
   if (!config.case_sensitive) msg.content = msg.content.toLowerCase();
   if (config.remove_duplicate_spaces)
     msg.content = msg.content.replace(/\s+/g, " ");
+
   const trimmed: string = msg.content.substr(config.prefix.length); //remove prefix from command
   const command: string = trimmed.split(" ")[0];
+  console.log("command", command);
   const found_command: command =
     client.commands.get(command) ||
-    client.commands.find((c: command) =>
-      c.alias ? c.alias.has(command) : false
+    client.commands.find((c: command) => {
+      console.log(c);
+      return c.alias ? c.alias.has(command) : false
+    }
     ); //check if command is an actual comamnd
   if (!found_command) {
     msg.reply(
@@ -38,10 +42,9 @@ export default async function run(client: my_client, msg: Message) {
       embeds.simple_embed(
         command_parsed.title,
         false,
-        `${command_parsed.error_message}${
-          found_command.sample_usage
-            ? "\n Sample usage:  " + found_command.sample_usage
-            : ""
+        `${command_parsed.error_message}${found_command.sample_usage
+          ? "\n Sample usage:  " + found_command.sample_usage
+          : ""
         }${found_command.form ? `\n General Form:  ` + found_command.form : ""}`
       )
     );

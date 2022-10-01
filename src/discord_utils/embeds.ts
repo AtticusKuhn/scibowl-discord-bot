@@ -10,7 +10,7 @@ export function simple_embed(
   const example_embed: MessageEmbed = new Discord.MessageEmbed()
     .setColor(success ? config.success_color : config.failure_color)
     .setTitle(title)
-    .setURL("https://repl.it/@AtticusKuhn/Sample-discordjs-template")
+    .setURL("https://atticuskuhn.github.io/scibowl/")
     .setDescription(message)
     .setThumbnail(
       "https://storage.googleapis.com/replit/images/1578865152393_256089a828f3a4aad28080aba5e80078.jpeg"
@@ -27,7 +27,7 @@ export function json_embed(json: any) {
   const example_embed = new Discord.MessageEmbed()
     .setColor(config.success_color)
     .setTitle("sample bot")
-    .setURL("https://repl.it/@AtticusKuhn/Sample-discordjs-template")
+    .setURL("https://atticuskuhn.github.io/scibowl/")
     .setThumbnail(
       "https://storage.googleapis.com/replit/images/1578865152393_256089a828f3a4aad28080aba5e80078.jpeg"
     )

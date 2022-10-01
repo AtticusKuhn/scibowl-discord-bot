@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.ts",
   "scripts": {
+    "run": "tsc",
     "test": "jest"
   },
   "keywords": [],

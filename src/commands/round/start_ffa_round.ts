@@ -27,7 +27,7 @@ function async_collect(
       if (check_answer(question.tossup_answer, m.content)) {
         resolutionFunc({ success: true, m });
       }
-      m.reply(simple_embed("no", false, "incorrect"));
+      m.reply(simple_embed("no", false, `<@${m.author.id}> is incorrect to say "${m.content}"`));
       counts++;
       if (counts >= 2) {
         resolutionFunc({ success: false, m });
@@ -64,12 +64,15 @@ export default {
         question
       );
       if (result.success) {
-        round_points[result.m.author.id] ==
-          (round_points[result.m.author.id]
-            ? round_points[result.m.author.id]
+        //@ts-ignore
+        const m: Message = result.m;
+        const id = m.author.id;
+        round_points[id] ==
+          (round_points[id]
+            ? round_points[id]
             : 0) +
-            1;
-        result.m.reply(simple_embed("yay", true, "correct"));
+          1;
+        result.m.reply(simple_embed("yay", true, `<@${id}> is correct.`));
       } else {
         await msg.channel.send(
           simple_embed(
@@ -83,12 +86,11 @@ export default {
         simple_embed(
           "end",
           true,
-          ` ffa_round \n end of question ${question_number} points are ${
-            Object.keys(round_points).length > 0
-              ? Object.keys(round_points).map(
-                  (key) => `<@${key}> - ${round_points[key]}`
-                )
-              : "no points"
+          ` ffa_round \n end of question ${question_number} points are ${Object.keys(round_points).length > 0
+            ? Object.keys(round_points).map(
+              (key) => `<@${key}> - ${round_points[key]}`
+            )
+            : "no points"
           }`
         )
       );
